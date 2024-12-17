@@ -1,0 +1,75 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Ensure images and videos are responsive */
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Default Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px; /* Default font size for desktops */
+    line-height: 1.6;
+}
+
+/* General Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Grid for Projects and Services */
+.services-grid, .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Default: Three columns */
+    gap: 20px;
+}
+
+.project-item, .service-item {
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px; /* Smaller font for tablets */
+    }
+
+    /* Replace long text with shorter versions */
+    .projects-grid .project-item p, 
+    .services-grid .service-item p {
+        display: none; /* Hide long paragraphs */
+    }
+
+    .projects-grid .project-item:after,
+    .services-grid .service-item:after {
+        content: "Short description here."; /* Replace with a concise description */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 12px; /* Smaller font for mobile */
+    }
+
+    /* Adjust layout to single column */
+    .services-grid, .projects-grid {
+        grid-template-columns: 1fr; /* Single column */
+    }
+
+    .navbar nav ul {
+        flex-direction: column; /* Stack navigation vertically */
+        gap: 10px;
+    }
+}

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philemon Mutisya - Fullstack Developer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            align-items: center;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center; /* Center navbar items */
+            align-items: center;
+            padding: 10px 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #fff;
+            margin-right: 50px; /* Space between logo and menu */
+        }
+        .navbar nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px; /* Adjust gap between menu items */
+        }
+        .navbar nav ul li {
+            display: inline;
+        }
+        .navbar nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        .navbar nav ul li a:hover {
+            color: #ff69b4;
+        }
+        .floating-container {
+            text-align: center;
+            align-items: center;
+            position: absolute;
+            top: 100px; /* Position the container below the navbar */
+            right: 25cm;
+            text-align: center;
+            transform: translateX(-50%); /* Center horizontally */
+        }
+        
+        .floating-image {
+            width: 5cm; /* Set the image diameter to 5cm */
+            height: 5cm; /* Keep the height the same to make it a perfect circle */
+            border-radius: 50%; /* Smooth edges to make it round */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for the floating effect */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
+        }
+        
+        .floating-image:hover {
+            transform: scale(1.1); /* Slightly enlarge the image on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+        }
+        
+        .download-btn {
+            display: inline-block;
+            margin-top: 15px; /* Space between the image and the button (smaller to bring it closer) */
+            padding: 15px 30px;
+            background-color: #ff69b4; /* Button color */
+            color: white;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for the button */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background-color: #14ccff; /* Darker color on hover */
+            transform: scale(1.05); /* Slightly enlarge the button on hover */
+        }
+        
+        .hero {
+            display: inline-block;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* Align the content to the left */
+            height: 100vh; /* Full height of the viewport */
+            padding-left: 3cm; /* Add 3cm space from the left margin */
+            text-align: left; /* Align the text to the left */
+            margin-right: 50%; /* Remove default margin */
+        }
+    
+        .hero h1 {
+            font-size: 4rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            margin-top: 60%; /* Remove default margin */
+        }    
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            max-width: 600px; /* Limit the paragraph width */
+            margin-left: auto;
+            margin-right: auto; /* Center the paragraph */
+            text-align: center; /* Align the text to the left */
+        }
+        h2 {
+            color: black;
+        }
+        
+        /* Services, Projects, and Pricing Sections */
+.services-section, .projects-section, .pricing-section {
+    padding: 50px 20px;
+    text-align: center;
+    align-items: center;
+    background-color: rgba(170, 249, 244, 0.9);
+    margin: 20px auto;
+    border-radius: 8px;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+}
+
+/* Services Grid */
+.services-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%; /* Ensure it takes full width */
+}
+
+/* Service Item */
+.service-item {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 250px;
+    color: black;
+    margin-bottom: 20px; /* Space between items */
+}
+
+/* Service Item Heading */
+.service-item h3 {
+    margin-bottom: 10px;
+}
+
+/* Service Item Price */
+.service-item .price {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .services-section, .projects-section, .pricing-section {
+        padding: 40px 10px;
+        width: 100%; /* Ensure it takes full width */
+        margin: 0 auto; /* Remove any margin pushing content to one side */
+    }
+
+    .services-grid {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        gap: 15px;
+    }
+
+    .service-item {
+        width: 90%; /* Make each service item take up more width */
+        max-width: 400px; /* Limit width on mobile */
+        margin-bottom: 15px; /* Space between items */
+    }
+}
+
+@media (max-width: 480px) {
+    .services-section, .projects-section, .pricing-section {
+        padding: 30px 10px;
+        width: 100%; /* Ensure it takes full width */
+        margin: 0 auto; /* Keep content centered */
+    }
+
+    .services-grid {
+        flex-direction: column; /* Stack items vertically */
+        gap: 10px;
+    }
+
+    .service-item {
+        width: 100%; /* Make each service item take full width */
+        max-width: none; /* Remove max-width */
+    }
+}
+
+
+        .projects-section .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Create three columns */
+            gap: 20px;
+            padding: 10px;
+            justify-items: center; /* Center items in each grid cell */
+        }
+        
+        .projects-section .project-item {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%; /* Ensures the item takes full width of the grid cell */
+        }
+        
+        .projects-section .project-item a {
+            display: block;
+            text-decoration: none;
+            color: black;
+        }
+        
+        .projects-section .project-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .projects-section .project-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        footer {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb); /* Gradient background */
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        footer h3 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        footer p {
+            font-size: 0.9em;
+            color: #f1f1f1;
+            margin-top: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 2.5em;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2); /* Enlarge icons on hover */
+            color: #ff5722; /* Change color on hover */
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #f1f1f1;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #ff5722; /* Hover color for links */
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            footer {
+                padding: 30px 10px;
+            }
+
+            footer h3 {
+                font-size: 1.8em;
+            }
+
+            .social-icons a {
+                font-size: 2em;
+            }
+        }
+        @media (max-width: 1024px) {
+            .box {
+                flex: 1 1 calc(50% - 20px); /* 2 boxes per row on medium screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+            .box {
+                flex: 1 1 100%; /* 1 box per row on small screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                font-size: 18px;
+            }
+            .box {
+                padding: 10px;
+            }
+        }
+    </style>
+    
+</head>
+<body style="background-image: url('img/software-developer-6521720.jpg'); background-size: cover; background-attachment: scroll; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+    <header class="navbar">
+        <div class="logo">Philemon Mutisya</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="contactme.html">contact</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+    <div class="floating-container">
+        <!-- Floating Image -->
+        <img src="img/IMG_E4548.JPG" alt="Philemon Mutisya" class="floating-image">
+        
+        <!-- Download CV Button -->
+        <a href="img/CARRICULUM VITAE.pdf" download="Philemon_Mutisya_CV" class="download-btn">
+            Download CV
+        </a>
+    </div>
+    <section id="home" class="hero">
+        <h1>Welcome to My Portfolio</h1>
+            <p>Hi, I'm Philemon Mutisya, a passionate Fullstack Developer who transforms ideas into powerful, intuitive websites and applications. With years of hands-on experience and a deep love for code, I'm here to build solutions that make an impact. Ready to collaborate on your next project? Let's create something amazing together</p>
+    </section>
+    <section id="services" class="services-section">
+        <h2>My Expertise</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <h3>Web Development</h3>
+                <p>Building responsive and scalable websites.</p>
+                <p>HTML, CSS, PHP,</p>
+            </div>
+            <div class="service-item">
+                <h3>Backend Systems</h3>
+                <p>Robust backend solutions</p>
+                <P>JAVASCRIPT, PYTHON, MySQL, Node.js</P>
+            </div>
+            <div class="service-item">
+                <h3>Database Management</h3>
+                <p>SQL and NoSQL database expertise.</p>
+            </div>
+        </div>
+    </section>
+    <section id="projects" class="projects-section">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-item">
+                <a href="https://techvoyage.co.ke/">
+                    <img src="img/TECH VOYAGE.jpg" alt="Project 1">
+                    <p>Project One</p>
+                    <P>Navigating Solutions for Tomorrow.We craft innovative web and data solutions that empower individuals, communities, and organizations to thrive in the digital landscape.</P>
+                </a>
+            </div>
+            <div class="project-item">
+                <a href="https://itik-solutions-vite.vercel.app/">
+                    <img src="img/ITIK SOLUTIONS.svg" alt="Project 2">
+                    <p>Project Two</p>
+                    <P>Accelerate your digital transformation and drive growth with us. Our expertise in modern technology and innovative solutions will help you streamline processes, enhance customer experiences, and reach new heights in today's digital landscape.</P>
+                </a>
+            </div>
+            <div class="project-item">
+                <a href="https://retail-app-kappa.vercel.app/">
+                    <img src="img/Screenshot_from_2024-09-15_16-20-16-removebg.75bf8b38ac46be0ae249.png" alt="Project 3">
+                    <p>Project Three</p>
+                </a>
+            </div>
+            <div class="project-item">
+                <a href="https://i-reporter-client-1.vercel.app/">
+                    <img src="img/corruption.jpg" alt="Project 4">
+                    <p>Project Four</p>
+                    <P>By using iReporter, you become a proactive citizen who contributes to the fight against corruption and the improvement of governance in your community. Your reports help draw attention to issues, prompt action from authorities, and drive positive change.</P>
+                </a>
+            </div>
+            <div class="project-item">
+                <a href="https://ephemeral-haupia-1353b1.netlify.app/">
+                    <img src="img/thumbnails_5.jpg" alt="Project 5">
+                    <p>Project Five</p>
+                    <P>A site where you just input city or location name then it gives current temperature and weekly predictions</P>
+                </a>
+            </div>
+            <div class="project-item">
+                <a href="https://sites.google.com/view/phillcode/home ">
+                    <img src="img/PHILLCODE LOGO.png" alt="Project 6">
+                    <p>Project Six</p>
+                    <p>Phillcode is a dynamic and innovative digital solutions company specializing in website development, software solutions, and digital marketing. Based in New Jersey, USA, Phillcode combines the expertise of seasoned developers with fresh, creative perspectives from emerging talents to deliver cutting-edge projects. The company operates with a global mindset, offering professional services 24/7 through a dedicated team of agents committed to ensuring clear and detailed client communication.  
+                        </p>
+                </a>
+            </div>
+            <div class="project-item">
+                <a href="https://sites.google.com/view/primeventurestrvl/home ">
+                    <img src="img/7346173.png" alt="Project 7">
+                    <p>Project Seven</p>
+                    <p>Prime Ventures is an adventure and travel company focused on delivering exceptional outdoor experiences. Similar to Highland Hikes, Prime Ventures provides curated trips and adventures for individuals or groups seeking to explore breathtaking natural landscapes. </p>
+                </a>
+            </div>
+            <div class="project-item">
+                <a href="https://sites.google.com/view/fambuko-ltd/home ">
+                    <img src="img/demolision fambuko.jpg" alt="Project 8">
+                    <p>Project Eight</p>
+                    <p>Fambuko Ltd is a dedicated construction company that specializes in delivering high-quality building and infrastructure projects. With a commitment to excellence, Fambuko Ltd provides a wide range of construction services, including residential, commercial, and industrial developments</p>
+                </a>
+            </div>
+            <div class="project-item">
+                <a href="https://sites.google.com/view/highlandhikes/home ">
+                    <img src="img/highlandhikes logo.png" alt="Project 9">
+                    <p>Project Nine</p>
+                    <p>Highland Hikes is a premier adventure and travel company specializing in organizing unforgettable hiking experiences and outdoor expeditions. Focused on providing nature enthusiasts and thrill-seekers with safe, guided tours, Highland Hikes explores scenic trails, majestic highlands, and hidden gems, offering breathtaking views and immersive adventures. </p>
+                </a>
+            </div>
+        </div>
+        <footer>
+            <h3>Let's Connect</h3>
+            <p>&copy; 2024 Philemon Mutisya. All Rights Reserved.</p>
+        </footer>
+        
+ 
+</body>
+</html
